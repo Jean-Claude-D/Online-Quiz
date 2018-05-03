@@ -51,10 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CATEGORY.cs">
+      <DependentUpon>OnlineQuizz.tt</DependentUpon>
+    </Compile>
     <Compile Include="OnlineQuizz.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OnlineQuizz.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OnlineQuizz.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnlineQuizz.tt</DependentUpon>
     </Compile>
     <Compile Include="OnlineQuizz.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -63,6 +71,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QUESTION.cs">
+      <DependentUpon>OnlineQuizz.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USER.cs">
+      <DependentUpon>OnlineQuizz.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USER_ANSWER.cs">
+      <DependentUpon>OnlineQuizz.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -79,6 +96,12 @@
     <Content Include="OnlineQuizz.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OnlineQuizz.Context.cs</LastGenOutput>
+      <DependentUpon>OnlineQuizz.edmx</DependentUpon>
+    </Content>
+    <Content Include="OnlineQuizz.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OnlineQuizz.edmx</DependentUpon>
+      <LastGenOutput>OnlineQuizz.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

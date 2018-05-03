@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db1633477Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TITLE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="QUESTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TITLE" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CATEGORY_ID" Type="int" />
+          <Property Name="AUTHOR" Type="varchar" MaxLength="20" />
+          <Property Name="OPT_A" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OPT_B" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OPT_C" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OPT_D" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="UNAME" />
+          </Key>
+          <Property Name="UNAME" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PASSW_HASH" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="SALT" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FNAME" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LNAME" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db1633477.dbo.USER_ANSWER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="USER_ANSWER">
+          <Key>
+            <PropertyRef Name="QUES_ID" />
+            <PropertyRef Name="CORR_ANS" />
+          </Key>
+          <Property Name="UNAME" Type="varchar" MaxLength="20" />
+          <Property Name="QUES_ID" Type="int" Nullable="false" />
+          <Property Name="CORR_ANS" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__QUESTION__AUTHOR__08B54D69">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="QUESTION" Type="Self.QUESTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UNAME" />
+            </Principal>
+            <Dependent Role="QUESTION">
+              <PropertyRef Name="AUTHOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QUESTION__CATEGO__07C12930">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="QUESTION" Type="Self.QUESTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUESTION">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_ANSW__QUES___0B91BA14">
+          <End Role="QUESTION" Type="Self.QUESTION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USER_ANSWER" Type="Self.USER_ANSWER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUESTION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER_ANSWER">
+              <PropertyRef Name="QUES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_ANSW__UNAME__0A9D95DB">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="USER_ANSWER" Type="Self.USER_ANSWER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UNAME" />
+            </Principal>
+            <Dependent Role="USER_ANSWER">
+              <PropertyRef Name="UNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db1633477ModelStoreContainer">
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUESTION" EntityType="Self.QUESTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_ANSWER" EntityType="Self.USER_ANSWER" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [USER_ANSWER].[UNAME] AS [UNAME], 
+    [USER_ANSWER].[QUES_ID] AS [QUES_ID], 
+    [USER_ANSWER].[CORR_ANS] AS [CORR_ANS]
+    FROM [dbo].[USER_ANSWER] AS [USER_ANSWER]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__QUESTION__AUTHOR__08B54D69" Association="Self.FK__QUESTION__AUTHOR__08B54D69">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="QUESTION" EntitySet="QUESTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QUESTION__CATEGO__07C12930" Association="Self.FK__QUESTION__CATEGO__07C12930">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="QUESTION" EntitySet="QUESTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_ANSW__QUES___0B91BA14" Association="Self.FK__USER_ANSW__QUES___0B91BA14">
+            <End Role="QUESTION" EntitySet="QUESTION" />
+            <End Role="USER_ANSWER" EntitySet="USER_ANSWER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_ANSW__UNAME__0A9D95DB" Association="Self.FK__USER_ANSW__UNAME__0A9D95DB">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="USER_ANSWER" EntitySet="USER_ANSWER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db1633477Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TITLE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="QUESTIONs" Relationship="Self.FK__QUESTION__CATEGO__07C12930" FromRole="CATEGORY" ToRole="QUESTION" />
+        </EntityType>
+        <EntityType Name="QUESTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TITLE" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CATEGORY_ID" Type="Int32" />
+          <Property Name="AUTHOR" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OPT_A" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OPT_B" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OPT_C" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OPT_D" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CATEGORY" Relationship="Self.FK__QUESTION__CATEGO__07C12930" FromRole="QUESTION" ToRole="CATEGORY" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__QUESTION__AUTHOR__08B54D69" FromRole="QUESTION" ToRole="USER" />
+          <NavigationProperty Name="USER_ANSWER" Relationship="Self.FK__USER_ANSW__QUES___0B91BA14" FromRole="QUESTION" ToRole="USER_ANSWER" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="UNAME" />
+          </Key>
+          <Property Name="UNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSW_HASH" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SALT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="QUESTIONs" Relationship="Self.FK__QUESTION__AUTHOR__08B54D69" FromRole="USER" ToRole="QUESTION" />
+          <NavigationProperty Name="USER_ANSWER" Relationship="Self.FK__USER_ANSW__UNAME__0A9D95DB" FromRole="USER" ToRole="USER_ANSWER" />
+        </EntityType>
+        <EntityType Name="USER_ANSWER">
+          <Key>
+            <PropertyRef Name="QUES_ID" />
+            <PropertyRef Name="CORR_ANS" />
+          </Key>
+          <Property Name="UNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="QUES_ID" Type="Int32" Nullable="false" />
+          <Property Name="CORR_ANS" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="QUESTION" Relationship="Self.FK__USER_ANSW__QUES___0B91BA14" FromRole="USER_ANSWER" ToRole="QUESTION" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__USER_ANSW__UNAME__0A9D95DB" FromRole="USER_ANSWER" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK__QUESTION__CATEGO__07C12930">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="QUESTION" Type="Self.QUESTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QUESTION">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QUESTION__AUTHOR__08B54D69">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="QUESTION" Type="Self.QUESTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UNAME" />
+            </Principal>
+            <Dependent Role="QUESTION">
+              <PropertyRef Name="AUTHOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_ANSW__QUES___0B91BA14">
+          <End Role="QUESTION" Type="Self.QUESTION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USER_ANSWER" Type="Self.USER_ANSWER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUESTION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER_ANSWER">
+              <PropertyRef Name="QUES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_ANSW__UNAME__0A9D95DB">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="USER_ANSWER" Type="Self.USER_ANSWER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UNAME" />
+            </Principal>
+            <Dependent Role="USER_ANSWER">
+              <PropertyRef Name="UNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db1633477Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
+          <EntitySet Name="QUESTIONs" EntityType="Self.QUESTION" />
+          <EntitySet Name="USERs" EntityType="Self.USER" />
+          <EntitySet Name="USER_ANSWER" EntityType="Self.USER_ANSWER" />
+          <AssociationSet Name="FK__QUESTION__CATEGO__07C12930" Association="Self.FK__QUESTION__CATEGO__07C12930">
+            <End Role="CATEGORY" EntitySet="CATEGORies" />
+            <End Role="QUESTION" EntitySet="QUESTIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QUESTION__AUTHOR__08B54D69" Association="Self.FK__QUESTION__AUTHOR__08B54D69">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="QUESTION" EntitySet="QUESTIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_ANSW__QUES___0B91BA14" Association="Self.FK__USER_ANSW__QUES___0B91BA14">
+            <End Role="QUESTION" EntitySet="QUESTIONs" />
+            <End Role="USER_ANSWER" EntitySet="USER_ANSWER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_ANSW__UNAME__0A9D95DB" Association="Self.FK__USER_ANSW__UNAME__0A9D95DB">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="USER_ANSWER" EntitySet="USER_ANSWER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db1633477ModelStoreContainer" CdmEntityContainer="db1633477Entities">
+          <EntitySetMapping Name="CATEGORies">
+            <EntityTypeMapping TypeName="db1633477Model.CATEGORY">
+              <MappingFragment StoreEntitySet="CATEGORY">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUESTIONs">
+            <EntityTypeMapping TypeName="db1633477Model.QUESTION">
+              <MappingFragment StoreEntitySet="QUESTION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
+                <ScalarProperty Name="AUTHOR" ColumnName="AUTHOR" />
+                <ScalarProperty Name="OPT_A" ColumnName="OPT_A" />
+                <ScalarProperty Name="OPT_B" ColumnName="OPT_B" />
+                <ScalarProperty Name="OPT_C" ColumnName="OPT_C" />
+                <ScalarProperty Name="OPT_D" ColumnName="OPT_D" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERs">
+            <EntityTypeMapping TypeName="db1633477Model.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="UNAME" ColumnName="UNAME" />
+                <ScalarProperty Name="PASSW_HASH" ColumnName="PASSW_HASH" />
+                <ScalarProperty Name="SALT" ColumnName="SALT" />
+                <ScalarProperty Name="FNAME" ColumnName="FNAME" />
+                <ScalarProperty Name="LNAME" ColumnName="LNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_ANSWER">
+            <EntityTypeMapping TypeName="db1633477Model.USER_ANSWER">
+              <MappingFragment StoreEntitySet="USER_ANSWER">
+                <ScalarProperty Name="UNAME" ColumnName="UNAME" />
+                <ScalarProperty Name="QUES_ID" ColumnName="QUES_ID" />
+                <ScalarProperty Name="CORR_ANS" ColumnName="CORR_ANS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

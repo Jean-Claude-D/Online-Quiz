@@ -20,9 +20,10 @@ namespace XMLReader
 
             string password = "MyPassword";
             Console.WriteLine("Hashing : " + password);
-            byte[] salt = Security.GetBytesSalt(255);
-            Console.WriteLine("Salt : " + Convert.ToBase64String(salt));
-            Console.WriteLine("Hashed : " + Security.Hash(password, salt, 255));
+            byte[] saltBytes;
+            string salt = Security.GetSalt(255, out saltBytes);
+            Console.WriteLine("Salt : " + salt);
+            Console.WriteLine("Hashed : " + Security.Hash(password, saltBytes, 255));
 
             ///* Testing argument list */
             //if(args == null || args.Length <= 0)

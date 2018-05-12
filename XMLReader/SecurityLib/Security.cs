@@ -42,28 +42,24 @@ namespace SecurityLib
         public static string Hash(string password, byte[] salt, int hashLength)
         {
             var hashedPassword = new Rfc2898DeriveBytes(password, salt, 10000)
-                .GetBytes(toBase64BitCount(hashLength) * 8);
+                .GetBytes(toBase64BytesCount(hashLength));
 
-            return Convert.ToBase64String(hashedPassword);
+            return Convert.ToBase64String(hashedPassword).TrimEnd('=');
         }
 
-        public static string GetSalt(int length)
+
+        public static string GetSalt(int length, out byte[] saltBytes)
         {
-            return Convert.ToBase64String(GetBytesSalt(toBase64BitCount(length)));
+            saltBytes = new byte[toBase64BytesCount(length)];
+            _rand.GetBytes(saltBytes);
+
+            return Convert.ToBase64String(saltBytes).TrimEnd('=');
         }
 
-        public static byte[] GetBytesSalt(int length)
-        {
-            byte[] salt = new byte[length];
-            _rand.GetBytes(salt);
-
-            return salt;
-        }
-
-        private static int toBase64BitCount(int bytesCount)
+        private static int toBase64BytesCount(int bytesCount)
         {
             /* Each set of Base64 is formed of 6 bits */
-            return (int)Math.Ceiling((double)bytesCount / 6);
+            return (int) Math.Ceiling((double)bytesCount / 8 * 6) - 1;
         }
     }
 }

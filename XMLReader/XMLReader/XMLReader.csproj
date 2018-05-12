@@ -78,6 +78,7 @@
     <Compile Include="USER.cs">
       <DependentUpon>OnlineQuizz.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserParserXML.cs" />
     <Compile Include="USER_ANSWER.cs">
       <DependentUpon>OnlineQuizz.tt</DependentUpon>
     </Compile>
@@ -108,6 +109,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SecurityLib\SecurityLib.csproj">
+      <Project>{0b058f57-81da-4458-affb-f64ccd23e51b}</Project>
+      <Name>SecurityLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

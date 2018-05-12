@@ -48,9 +48,12 @@ namespace XMLReader
                     switch (rootElement)
                     {
                         case "questions":
+                            Console.WriteLine("Parsing Questions here");
+                            QuestionParserXML.parse(xmlDoc);
                             //Parsing questions
                             break;
                         case "users":
+                            Console.WriteLine("Parsing Users here");
                             //Parsing users
                             break;
                         default:

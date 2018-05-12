@@ -74,6 +74,7 @@
     <Compile Include="QUESTION.cs">
       <DependentUpon>OnlineQuizz.tt</DependentUpon>
     </Compile>
+    <Compile Include="QuestionParserXML.cs" />
     <Compile Include="USER.cs">
       <DependentUpon>OnlineQuizz.tt</DependentUpon>
     </Compile>

@@ -22,7 +22,7 @@ namespace XMLReader
 
         public static string getStringChild(XElement element, string name)
         {
-            return getTChild<string>(element, name, (child) => child);
+            return getTChild<string>(element, name, (child) => child.Trim());
         }
     }
 }

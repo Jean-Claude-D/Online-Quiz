@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="db1633477Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="db1633477Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="ID" />
@@ -47,7 +47,7 @@ warning 6002: The table/view 'db1633477.dbo.USER_ANSWER' does not have a primary
           <Property Name="QUES_ID" Type="int" Nullable="false" />
           <Property Name="CORR_ANS" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__QUESTION__AUTHOR__08B54D69">
+        <Association Name="FK__QUESTION__AUTHOR__1BC821DD">
           <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
           <End Role="QUESTION" Type="Self.QUESTION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -59,7 +59,7 @@ warning 6002: The table/view 'db1633477.dbo.USER_ANSWER' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__QUESTION__CATEGO__07C12930">
+        <Association Name="FK__QUESTION__CATEGO__1AD3FDA4">
           <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -73,7 +73,7 @@ warning 6002: The table/view 'db1633477.dbo.USER_ANSWER' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USER_ANSW__QUES___0B91BA14">
+        <Association Name="FK__USER_ANSW__QUES___1EA48E88">
           <End Role="QUESTION" Type="Self.QUESTION" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -87,7 +87,7 @@ warning 6002: The table/view 'db1633477.dbo.USER_ANSWER' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USER_ANSW__UNAME__0A9D95DB">
+        <Association Name="FK__USER_ANSW__UNAME__1DB06A4F">
           <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
           <End Role="USER_ANSWER" Type="Self.USER_ANSWER" Multiplicity="*" />
           <ReferentialConstraint>
@@ -110,25 +110,24 @@ warning 6002: The table/view 'db1633477.dbo.USER_ANSWER' does not have a primary
     [USER_ANSWER].[CORR_ANS] AS [CORR_ANS]
     FROM [dbo].[USER_ANSWER] AS [USER_ANSWER]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__QUESTION__AUTHOR__08B54D69" Association="Self.FK__QUESTION__AUTHOR__08B54D69">
+          <AssociationSet Name="FK__QUESTION__AUTHOR__1BC821DD" Association="Self.FK__QUESTION__AUTHOR__1BC821DD">
             <End Role="USER" EntitySet="USER" />
             <End Role="QUESTION" EntitySet="QUESTION" />
           </AssociationSet>
-          <AssociationSet Name="FK__QUESTION__CATEGO__07C12930" Association="Self.FK__QUESTION__CATEGO__07C12930">
+          <AssociationSet Name="FK__QUESTION__CATEGO__1AD3FDA4" Association="Self.FK__QUESTION__CATEGO__1AD3FDA4">
             <End Role="CATEGORY" EntitySet="CATEGORY" />
             <End Role="QUESTION" EntitySet="QUESTION" />
           </AssociationSet>
-          <AssociationSet Name="FK__USER_ANSW__QUES___0B91BA14" Association="Self.FK__USER_ANSW__QUES___0B91BA14">
+          <AssociationSet Name="FK__USER_ANSW__QUES___1EA48E88" Association="Self.FK__USER_ANSW__QUES___1EA48E88">
             <End Role="QUESTION" EntitySet="QUESTION" />
             <End Role="USER_ANSWER" EntitySet="USER_ANSWER" />
           </AssociationSet>
-          <AssociationSet Name="FK__USER_ANSW__UNAME__0A9D95DB" Association="Self.FK__USER_ANSW__UNAME__0A9D95DB">
+          <AssociationSet Name="FK__USER_ANSW__UNAME__1DB06A4F" Association="Self.FK__USER_ANSW__UNAME__1DB06A4F">
             <End Role="USER" EntitySet="USER" />
             <End Role="USER_ANSWER" EntitySet="USER_ANSWER" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db1633477Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

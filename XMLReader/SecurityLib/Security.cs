@@ -20,25 +20,6 @@ namespace SecurityLib
             _unsecureRand = new Random();
         }
 
-        public static string GeneratePassword()
-        {
-            string file = "worstPasswordList.txt";
-            try
-            {
-                using (StreamReader stream = new StreamReader(file))
-                {
-                    string[] passwords = stream.ReadToEnd().Split('\n');
-
-                    return passwords[_unsecureRand.Next(passwords.Length)];
-                }
-            }
-            catch (IOException)
-            {
-                throw new Exception("Error Accessing : " + file);
-            }
-
-        }
-
         public static string Hash(string password, byte[] salt, int hashLength)
         {
             var hashedPassword = new Rfc2898DeriveBytes(password, salt, 10000)

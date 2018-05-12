@@ -28,16 +28,23 @@ namespace XMLReader
                 salt = Security.GetSalt(255, out saltBytes);
 
                 uname = XMLParserHelper.GetStringAttribute(userXML, "userId");
-                Console.WriteLine("Parsing...\t" + uname);
 
-                db.USERs.Add(new USER
+                if(db.USERs.Any((user) => user.UNAME.Equals(uname)))
                 {
-                    UNAME = uname,
-                    PASSW_HASH = Security.Hash(password, saltBytes, 255),
-                    SALT = salt,
-                    FNAME = XMLParserHelper.GetStringAttribute(userXML, "firstName"),
-                    LNAME = XMLParserHelper.GetStringAttribute(userXML, "lastName")
-                });
+                    Console.WriteLine("Already Exists...\t" + uname);
+                }
+                else
+                {
+                    Console.WriteLine("Adding...\t" + uname);
+                    db.USERs.Add(new USER
+                    {
+                        UNAME = uname,
+                        PASSW_HASH = Security.Hash(password, saltBytes, 255),
+                        SALT = salt,
+                        FNAME = XMLParserHelper.GetStringAttribute(userXML, "firstName"),
+                        LNAME = XMLParserHelper.GetStringAttribute(userXML, "lastName")
+                    });
+                }
             }
 
             Console.WriteLine("Saving Changes...");

@@ -26,7 +26,7 @@ namespace XMLReader
                 }
                 else
                 {
-                    Console.WriteLine("Parsing...\t" + questionTitle);
+                    Console.WriteLine("Adding...\t" + questionTitle);
                     var options = orderOptions(
                         xmlQuestion.Elements().Where((child) => child.Name.LocalName.Equals("option")));
 

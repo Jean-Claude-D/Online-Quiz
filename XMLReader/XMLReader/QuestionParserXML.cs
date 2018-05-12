@@ -17,10 +17,24 @@ namespace XMLReader
 
             foreach(XElement xmlQuestion in xmlDocument.Root.Elements())
             {
-                Console.WriteLine(xmlQuestion.Name.ToString());
+                var question = new
+                {
+                    user = XMLParserHelper.getStringChild(xmlQuestion, "user"),
+                    category = XMLParserHelper.getStringChild(xmlQuestion, "category"),
+                    title = XMLParserHelper.getStringChild(xmlQuestion, "title"),
+                    opts = xmlQuestion.Elements().Select((child) => child.Name.LocalName.Equals("option"))
+                };
+                Console.WriteLine("Parsing...\t" + question.title);
+
+
             }
 
             return null;
         }
+
+        /*private static int parseCategory()
+        {
+            return 0;
+        }*/
     }
 }

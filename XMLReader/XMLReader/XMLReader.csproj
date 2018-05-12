@@ -81,6 +81,7 @@
     <Compile Include="USER_ANSWER.cs">
       <DependentUpon>OnlineQuizz.tt</DependentUpon>
     </Compile>
+    <Compile Include="XMLParserHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

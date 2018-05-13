@@ -34,13 +34,16 @@ namespace SecurityLib
             byte[] saltBytes = new byte[toBase64BytesCount(length)];
             _rand.GetBytes(saltBytes);
 
+            Console.WriteLine(Convert.ToBase64String(saltBytes));
+
             return Convert.ToBase64String(saltBytes);
         }
 
         private static int toBase64BytesCount(int bytesCount)
         {
             /* Each set of Base64 is formed of 6 bits */
-            return (int) Math.Ceiling((double)bytesCount / 8 * 6) - 1;
+            int unroundedCount = (int) Math.Floor((double)bytesCount / 4 * 3);
+            return unroundedCount - (unroundedCount % 4);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +12,12 @@ namespace XMLReader
 {
     public static class QuestionParserXML
     {
-        public static void parse(db1633477Entities db, XDocument xmlDocument)
+        public static void Parse(db1633477Entities db, XDocument xmlDocument)
         {
             foreach(XElement xmlQuestion in xmlDocument.Root.Elements())
             {
-                var categoryID = parseCategory(db, XMLParserHelper.getStringChild(xmlQuestion, "category"));
-                var questionTitle = XMLParserHelper.getStringChild(xmlQuestion, "title");
+                var categoryID = parseCategory(db, XMLParserHelper.GetStringChild(xmlQuestion, "category"));
+                var questionTitle = XMLParserHelper.GetStringChild(xmlQuestion, "title");
 
                 /* If question already exists */
                 if(db.QUESTIONs.Any((q) => q.CATEGORY_ID == categoryID && q.TITLE.Equals(questionTitle)))
@@ -25,20 +26,27 @@ namespace XMLReader
                 }
                 else
                 {
-                    Console.WriteLine("Parsing...\t" + questionTitle);
+                    Console.WriteLine("Adding...\t" + questionTitle);
                     var options = orderOptions(
                         xmlQuestion.Elements().Where((child) => child.Name.LocalName.Equals("option")));
 
-                    db.QUESTIONs.Add(new QUESTION
+                    try
                     {
-                        TITLE = questionTitle,
-                        CATEGORY_ID = categoryID,
-                        AUTHOR = XMLParserHelper.getStringChild(xmlQuestion, "user"),
-                        OPT_A = options[0],
-                        OPT_B = options[1],
-                        OPT_C = options[2],
-                        OPT_D = options[3]
-                    });
+                        db.QUESTIONs.Add(new QUESTION
+                        {
+                            TITLE = questionTitle,
+                            CATEGORY_ID = categoryID,
+                            AUTHOR = XMLParserHelper.GetStringChild(xmlQuestion, "user"),
+                            OPT_A = options[0],
+                            OPT_B = options[1],
+                            OPT_C = options[2],
+                            OPT_D = options[3]
+                        });
+                    }
+                    catch(DbUpdateException)
+                    {
+                        Console.WriteLine("Ignore...\t" + questionTitle);
+                    }
                 }
             }
 

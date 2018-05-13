@@ -7,8 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLReader", "XMLReader\XMLR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityLib", "SecurityLib\SecurityLib.csproj", "{0B058F57-81DA-4458-AFFB-F64CCD23E51B}"
 EndProject
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineQuiz", "OnlineQuiz\OnlineQuiz.csproj", "{983998D1-6CB1-4839-9912-448810B5FEAC}"
 EndProject
+=======
+>>>>>>> xmlApp
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +26,13 @@ Global
 		{0B058F57-81DA-4458-AFFB-F64CCD23E51B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B058F57-81DA-4458-AFFB-F64CCD23E51B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B058F57-81DA-4458-AFFB-F64CCD23E51B}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{983998D1-6CB1-4839-9912-448810B5FEAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{983998D1-6CB1-4839-9912-448810B5FEAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{983998D1-6CB1-4839-9912-448810B5FEAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{983998D1-6CB1-4839-9912-448810B5FEAC}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+>>>>>>> xmlApp
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

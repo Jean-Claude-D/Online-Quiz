@@ -20,12 +20,11 @@ namespace XMLReader
             string uname;
             string password;
             string salt;
-            byte[] saltBytes;
 
             foreach (XElement userXML in xmlDocument.Root.Elements())
             {
                 password = XMLParserHelper.GetStringAttribute(userXML, "password") ?? "password";
-                salt = Security.GetSalt(255, out saltBytes);
+                salt = Security.GetSalt(255);
 
                 uname = XMLParserHelper.GetStringAttribute(userXML, "userId");
 
@@ -39,7 +38,7 @@ namespace XMLReader
                     db.USERs.Add(new USER
                     {
                         UNAME = uname,
-                        PASSW_HASH = Security.Hash(password, saltBytes, 255),
+                        PASSW_HASH = Security.Hash(password, Convert.FromBase64String(salt), 255),
                         SALT = salt,
                         FNAME = XMLParserHelper.GetStringAttribute(userXML, "firstName"),
                         LNAME = XMLParserHelper.GetStringAttribute(userXML, "lastName")

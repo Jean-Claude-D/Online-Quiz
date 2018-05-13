@@ -16,7 +16,7 @@ namespace OnlineQuiz.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.returnUrl = returnUrl;
-            return View();
+            return View(new USER());
         }
 
         [HttpPost]
@@ -27,22 +27,21 @@ namespace OnlineQuiz.Controllers
             {
                 using (db1633477Entities db = new db1633477Entities())
                 {
-                    USER user = db.USERs.FirstOrDefault((user) => user.UNAME.Equals(userIn.UNAME));
+                    USER user = db.USERs.FirstOrDefault((currUser) => currUser.UNAME.Equals(userIn.UNAME));
 
                     if(user != null)
                     {
-                        Security.Hash(userIn.PASSW_HASH, user.SALT
+                        string hashedPassword = Security.Hash(userIn.PASSW_HASH,
+                            Convert.FromBase64String(user.SALT),
+                            255);
+
+                        if(hashedPassword.Equals(user.PASSW_HASH))
+                        {
+                            FormsAuthentication.RedirectFromLoginPage(userIn.UNAME, false);
+                        }
                     }
                 }
-                    User user = (from u in db.Users
-                                 where u.UserName.Equals(userIn.UserName)
-                                 select u).FirstOrDefault<User>();
-                if (user != null) // found a match
-                    if (user.Password.Equals(userIn.Password))
-                        //log into site:
-                        FormsAuthentication.RedirectFromLoginPage(userIn.UserName, false);
             }
-            //still here: either user not found, or password didn’t match
             ViewBag.ReturnUrl = ReturnUrl;
             ModelState.AddModelError("", "Invalid user name or password");
             return View();

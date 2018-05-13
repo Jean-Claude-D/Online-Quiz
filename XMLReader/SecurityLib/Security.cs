@@ -29,12 +29,12 @@ namespace SecurityLib
         }
 
 
-        public static string GetSalt(int length, out byte[] saltBytes)
+        public static string GetSalt(int length)
         {
-            saltBytes = new byte[toBase64BytesCount(length)];
+            byte[] saltBytes = new byte[toBase64BytesCount(length)];
             _rand.GetBytes(saltBytes);
 
-            return Convert.ToBase64String(saltBytes).TrimEnd('=');
+            return Convert.ToBase64String(saltBytes);
         }
 
         private static int toBase64BytesCount(int bytesCount)

@@ -18,12 +18,25 @@ namespace XMLReader
         {
             /* Testing Security */
 
-            string password = "MyPassword";
-            Console.WriteLine("Hashing : " + password);
-            byte[] saltBytes;
-            string salt = Security.GetSalt(255, out saltBytes);
-            Console.WriteLine("Salt : " + salt);
-            Console.WriteLine("Hashed : " + Security.Hash(password, saltBytes, 255));
+            EncryptionManager em = EncryptionManager.getInstance();
+
+            /* a minute of delay */
+            string publicKey = em.GetPublicKey(60_000, out int id);
+
+            string message = "Hello World";
+            Console.WriteLine("Plain message : [" + message + ']');
+            string encrypted = EncryptionManager.Encrypt(publicKey, message);
+            Console.WriteLine("Encrypted : [" + encrypted + ']');
+
+            string decrypted = EncryptionManager.getInstance().Decrypt(id, encrypted);
+            Console.WriteLine("Decrypted : [" + decrypted + ']');
+
+            //string password = "MyPassword";
+            //Console.WriteLine("Hashing : " + password);
+            //byte[] saltBytes;
+            //string salt = Security.GetSalt(255, out saltBytes);
+            //Console.WriteLine("Salt : " + salt);
+            //Console.WriteLine("Hashed : " + Security.Hash(password, saltBytes, 255));
 
             ///* Testing argument list */
             //if(args == null || args.Length <= 0)

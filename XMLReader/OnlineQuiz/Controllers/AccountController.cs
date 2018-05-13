@@ -46,5 +46,11 @@ namespace OnlineQuiz.Controllers
             ModelState.AddModelError("", "Invalid user name or password");
             return View();
         }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

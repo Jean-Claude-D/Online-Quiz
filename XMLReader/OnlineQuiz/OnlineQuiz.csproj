@@ -151,6 +151,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CATEGORY.cs">
+      <DependentUpon>OnlineQuiz.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatergoryModel.cs" />
     <Compile Include="Models\OnlineQuiz.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -165,6 +169,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OnlineQuiz.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QUESTION.cs">
+      <DependentUpon>OnlineQuiz.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER.cs">
+      <DependentUpon>OnlineQuiz.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER_ANSWER.cs">
+      <DependentUpon>OnlineQuiz.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\QUESTION.cs">

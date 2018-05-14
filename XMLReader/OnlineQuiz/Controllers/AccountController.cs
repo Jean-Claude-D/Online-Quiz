@@ -12,13 +12,17 @@ namespace OnlineQuiz.Controllers
 {
     public class AccountController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
-            if(System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            using (db1633477Entities db = new db1633477Entities())
             {
-                return View();
+                var logged = db.USERs.First((user) => user.UNAME.Equals(System.Web.HttpContext.Current.User.Identity.Name));
+                ViewBag.createdQuestions = logged.QUESTIONs.ToArray();
+                ViewBag.answeredQuestions = logged.USER_ANSWER.ToArray();
+
+                return View(logged);
             }
-            return RedirectToAction("Login");
         }
         
         // GET: Login

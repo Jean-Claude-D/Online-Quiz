@@ -9,4 +9,42 @@
 @model USER
 
 @Html.LabelFor(model => model.UNAME, htmlAttributes: new { @class = "control-label col-md-2" })
-<span></span>
+<span>@Model.UNAME</span>
+
+@Html.LabelFor(model => model.FNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+<span>@Model.FNAME</span>
+
+@Html.LabelFor(model => model.FNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+<span>@Model.FNAME</span>
+
+@{
+    if (ViewBag.createdQuestions.Length > 0)
+    {
+        foreach (QUESTION createdQuestion in ViewBag.createdQuestions)
+        {
+            <span>@createdQuestion.CATEGORY.TITLE</span>
+            <span>:</span>
+            <span>@createdQuestion.TITLE</span>
+        }
+    }
+    else
+    {
+        <span>No created questions</span>
+    }
+}
+
+@{
+    if (ViewBag.answeredQuestions.Length > 0)
+    {
+        foreach (USER_ANSWER answer in ViewBag.answeredQuestions)
+        {
+            <span>@answer.QUESTION.TITLE</span>
+            <span>:</span>
+            <span>@(answer.CORR_ANS ? "Correct" : "Wrong")</span>
+        }
+    }
+    else
+    {
+        <span>No answered questions</span>
+    }
+}

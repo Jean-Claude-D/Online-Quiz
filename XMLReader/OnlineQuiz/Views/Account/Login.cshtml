@@ -8,6 +8,8 @@
 
 @model USER
 
+@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "navbar-brand" })
+
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
 {
     @Html.AntiForgeryToken()

@@ -29,7 +29,7 @@ namespace OnlineQuiz.Controllers
                 {
                     USER user = db.USERs.FirstOrDefault((currUser) => currUser.UNAME.Equals(userIn.UNAME));
 
-                    if(user != null)
+                    if(user != default(USER))
                     {
                         string hashedPassword = Security.Hash(userIn.PASSW_HASH,
                             Convert.FromBase64String(user.SALT),
@@ -51,6 +51,38 @@ namespace OnlineQuiz.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Register(string returnUrl)
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include = "UNAME, PASSW_HASH, FNAME, LNAME")] USER userIn, string ReturnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                using (db1633477Entities db = new db1633477Entities())
+                {
+                    USER user = db.USERs.FirstOrDefault((currUser) => currUser.UNAME.Equals(userIn.UNAME));
+
+                    if (user == default(USER))
+                    {
+                        string salt = Security.GetSalt(255);
+                        userIn.SALT = salt;
+                        userIn.PASSW_HASH = Security.Hash(userIn.PASSW_HASH, Convert.FromBase64String(salt), 255);
+                        db.USERs.Add(userIn);
+                        db.SaveChanges();
+                        FormsAuthentication.RedirectFromLoginPage(userIn.UNAME, false);
+                    }
+                }
+            }
+            ViewBag.ReturnUrl = ReturnUrl;
+            ModelState.AddModelError("", "UserName Already Taken");
+            return View();
         }
     }
 }

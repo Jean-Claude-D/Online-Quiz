@@ -17,11 +17,22 @@ namespace OnlineQuiz.Controllers
         {
             using (db1633477Entities db = new db1633477Entities())
             {
-                var logged = db.USERs.First((user) => user.UNAME.Equals(System.Web.HttpContext.Current.User.Identity.Name));
-                ViewBag.createdQuestions = logged.QUESTIONs.ToArray();
-                ViewBag.answeredQuestions = logged.USER_ANSWER.ToArray();
+                var loggedUser = db
+                    .USERs
+                    .FirstOrDefault((user) => user.UNAME.Equals(System.Web.HttpContext.Current.User.Identity.Name));
 
-                return View(logged);
+                return View(new UserProfile()
+                {
+                    Username = loggedUser.UNAME,
+                    Firstname = loggedUser.FNAME,
+                    Lastname = loggedUser.LNAME,
+                    CreatedQuestions = loggedUser.QUESTIONs.ToArray(),
+                    AnsweredQuestions = db
+                    .QUESTIONs
+                    .Where((question) =>
+                        loggedUser.USER_ANSWER.Any((user_answer) => question.ID.Equals(user_answer.QUES_ID))
+                    ).ToArray()
+                });
             }
         }
         
@@ -68,7 +79,6 @@ namespace OnlineQuiz.Controllers
 
         public ActionResult Register(string returnUrl)
         {
-
             return View();
         }
 

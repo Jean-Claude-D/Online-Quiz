@@ -7,39 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace XMLReader
+namespace OnlineQuiz.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class USER
+    
+    public partial class CATEGORY
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USER()
+        public CATEGORY()
         {
             this.QUESTIONs = new HashSet<QUESTION>();
-            this.USER_ANSWER = new HashSet<USER_ANSWER>();
         }
-
-        [Required]
-        [DisplayName("UserName")]
-        public string UNAME { get; set; }
-        [Required]
-        [DisplayName("Password")]
-        public string PASSW_HASH { get; set; }
-        public string SALT { get; set; }
-        [Required]
-        [DisplayName("First Name")]
-        public string FNAME { get; set; }
-        [Required]
-        [DisplayName("Last Name")]
-        public string LNAME { get; set; }
+    
+        public int ID { get; set; }
+        public string TITLE { get; set; }
+        public string DESCRIPTION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QUESTION> QUESTIONs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USER_ANSWER> USER_ANSWER { get; set; }
     }
 }

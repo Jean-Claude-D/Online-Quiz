@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3a7ebd8b89a34a1f91fda6bbc542ed5f" Name="Diagram1">
+        <EntityTypeShape EntityType="db1633477Model.CATEGORY" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db1633477Model.QUESTION" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="db1633477Model.USER" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db1633477Model.USER_ANSWER" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="db1633477Model.FK__QUESTION__CATEGO__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="db1633477Model.FK__QUESTION__AUTHOR__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="db1633477Model.FK__USER_ANSW__QUES___1EA48E88" ManuallyRouted="false" />
+        <AssociationConnector Association="db1633477Model.FK__USER_ANSW__UNAME__1DB06A4F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

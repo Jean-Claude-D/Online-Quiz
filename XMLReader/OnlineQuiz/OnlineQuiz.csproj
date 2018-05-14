@@ -173,6 +173,7 @@
     <Compile Include="Models\USER.cs">
       <DependentUpon>OnlineQuiz.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\USER_ANSWER.cs">
       <DependentUpon>OnlineQuiz.tt</DependentUpon>
     </Compile>

@@ -12,27 +12,40 @@ namespace OnlineQuiz.Controllers
 {
     public class AccountController : Controller
     {
+        private static void _logout()
+        {
+            FormsAuthentication.SignOut();
+        }
+
         [Authorize]
         public ActionResult Index()
         {
             using (db1633477Entities db = new db1633477Entities())
             {
-                var loggedUser = db
+                USER loggedUser = db
                     .USERs
                     .FirstOrDefault((user) => user.UNAME.Equals(System.Web.HttpContext.Current.User.Identity.Name));
 
-                return View(new UserProfile()
+                if (loggedUser != default(USER))
                 {
-                    Username = loggedUser.UNAME,
-                    Firstname = loggedUser.FNAME,
-                    Lastname = loggedUser.LNAME,
-                    CreatedQuestions = loggedUser.QUESTIONs.ToArray(),
-                    AnsweredQuestions = db
-                    .QUESTIONs
-                    .Where((question) =>
-                        loggedUser.USER_ANSWER.Any((user_answer) => question.ID.Equals(user_answer.QUES_ID))
-                    ).ToArray()
-                });
+                    return View(new UserProfile()
+                    {
+                        Username = loggedUser.UNAME,
+                        Firstname = loggedUser.FNAME,
+                        Lastname = loggedUser.LNAME,
+                        CreatedQuestions = loggedUser.QUESTIONs.ToArray(),
+                        AnsweredQuestions = db
+                        .QUESTIONs
+                        .Where((question) =>
+                            loggedUser.USER_ANSWER.Any((user_answer) => question.ID.Equals(user_answer.QUES_ID))
+                        ).ToArray()
+                    });
+                }
+                else
+                {
+                    _logout();
+                    return RedirectToAction("Login");
+                }
             }
         }
         
@@ -73,7 +86,7 @@ namespace OnlineQuiz.Controllers
 
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
+            _logout();
             return RedirectToAction("Index", "Home");
         }
 

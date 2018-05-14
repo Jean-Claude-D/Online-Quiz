@@ -19,30 +19,47 @@ namespace XMLReader
         {
             string uname;
             string password;
+
             string salt;
-            byte[] saltBytes;
+            string passwHash;
+
+            string fname;
+            string lname;
 
             foreach (XElement userXML in xmlDocument.Root.Elements())
             {
                 password = XMLParserHelper.GetStringAttribute(userXML, "password") ?? "password";
-                salt = Security.GetSalt(255, out saltBytes);
+                Console.WriteLine("Getting Salt");
+                salt = Security.GetSalt(255);
 
                 uname = XMLParserHelper.GetStringAttribute(userXML, "userId");
+                passwHash = Security.Hash(password, Convert.FromBase64String(salt), 255);
+                fname = XMLParserHelper.GetStringAttribute(userXML, "firstName");
+                lname = XMLParserHelper.GetStringAttribute(userXML, "lastName");
 
-                if(db.USERs.Any((user) => user.UNAME.Equals(uname)))
+                var alreadyExistingUser = db
+                    .USERs
+                    .FirstOrDefault((user) => user.UNAME.Equals(uname));
+                if (default(USER) != alreadyExistingUser)
                 {
-                    Console.WriteLine("Already Exists...\t" + uname);
+                    Console.WriteLine("Updating...\t" + uname);
+
+                    alreadyExistingUser.PASSW_HASH = passwHash;
+                    alreadyExistingUser.SALT = salt;
+                    alreadyExistingUser.FNAME = fname;
+                    alreadyExistingUser.LNAME = lname;
                 }
                 else
                 {
                     Console.WriteLine("Adding...\t" + uname);
+
                     db.USERs.Add(new USER
                     {
                         UNAME = uname,
-                        PASSW_HASH = Security.Hash(password, saltBytes, 255),
+                        PASSW_HASH = passwHash,
                         SALT = salt,
-                        FNAME = XMLParserHelper.GetStringAttribute(userXML, "firstName"),
-                        LNAME = XMLParserHelper.GetStringAttribute(userXML, "lastName")
+                        FNAME = fname,
+                        LNAME = lname
                     });
                 }
             }

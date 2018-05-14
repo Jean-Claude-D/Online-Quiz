@@ -11,7 +11,9 @@ namespace XMLReader
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class USER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,11 +22,19 @@ namespace XMLReader
             this.QUESTIONs = new HashSet<QUESTION>();
             this.USER_ANSWER = new HashSet<USER_ANSWER>();
         }
-    
+
+        [Required]
+        [DisplayName("UserName")]
         public string UNAME { get; set; }
+        [Required]
+        [DisplayName("Password")]
         public string PASSW_HASH { get; set; }
         public string SALT { get; set; }
+        [Required]
+        [DisplayName("First Name")]
         public string FNAME { get; set; }
+        [Required]
+        [DisplayName("Last Name")]
         public string LNAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

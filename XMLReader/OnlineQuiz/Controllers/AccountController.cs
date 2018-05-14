@@ -12,6 +12,15 @@ namespace OnlineQuiz.Controllers
 {
     public class AccountController : Controller
     {
+        public ActionResult Index()
+        {
+            if(System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            return RedirectToAction("Login");
+        }
+        
         // GET: Login
         public ActionResult Login(string returnUrl)
         {

@@ -20,7 +20,7 @@
 @{
     if (ViewBag.createdQuestions.Length > 0)
     {
-        foreach (QUESTION createdQuestion in ViewBag.createdQuestions)
+        foreach (OnlineQuiz.Models.QUESTION createdQuestion in ViewBag.createdQuestions)
         {
             <span>@createdQuestion.CATEGORY.TITLE</span>
             <span>:</span>

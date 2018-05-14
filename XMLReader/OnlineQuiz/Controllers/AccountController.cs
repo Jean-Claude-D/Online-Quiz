@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-using OnlineQuiz;
+using OnlineQuiz.Models;
 using System.Web.Security;
 using SecurityLib;
 

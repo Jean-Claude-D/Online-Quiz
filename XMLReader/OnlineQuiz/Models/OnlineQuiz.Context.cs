@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnlineQuiz
+namespace OnlineQuiz.Models
 {
     using System;
     using System.Data.Entity;

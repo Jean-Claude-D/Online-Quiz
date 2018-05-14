@@ -7,30 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnlineQuiz
+namespace OnlineQuiz.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class QUESTION
+    public partial class USER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public QUESTION()
+        public USER()
         {
+            this.QUESTIONs = new HashSet<QUESTION>();
             this.USER_ANSWER = new HashSet<USER_ANSWER>();
         }
     
-        public int ID { get; set; }
-        public string TITLE { get; set; }
-        public Nullable<int> CATEGORY_ID { get; set; }
-        public string AUTHOR { get; set; }
-        public string OPT_A { get; set; }
-        public string OPT_B { get; set; }
-        public string OPT_C { get; set; }
-        public string OPT_D { get; set; }
+        public string UNAME { get; set; }
+        public string PASSW_HASH { get; set; }
+        public string SALT { get; set; }
+        public string FNAME { get; set; }
+        public string LNAME { get; set; }
     
-        public virtual CATEGORY CATEGORY { get; set; }
-        public virtual USER USER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QUESTION> QUESTIONs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USER_ANSWER> USER_ANSWER { get; set; }
     }

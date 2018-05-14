@@ -5,13 +5,13 @@ using System.Web;
 
 namespace OnlineQuiz.Models
 {
-    public class CatergoryModel
+    public class CategoryModel
     {
-        public String CatName { get; set; }
+        public CATEGORY Category { get; set; }
         public int NumQuestions { get; set; }
-        public CatergoryModel(String CatNames, int NumQuestions)
+        public CategoryModel(CATEGORY Category, int NumQuestions)
         {
-            this.CatName = CatName;
+            this.Category = Category;
             this.NumQuestions = NumQuestions;
         }
     }

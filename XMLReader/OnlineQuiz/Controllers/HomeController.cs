@@ -14,43 +14,77 @@ namespace OnlineQuiz.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            if(System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Authenticated");
-            }
+            bool userAuth = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            string uname = System.Web.HttpContext.Current.User.Identity.Name;
 
+            CategoryModel[] categories = null;
             if (ModelState.IsValid)
             {
                 using (db1633477Entities db = new db1633477Entities())
                 {
                     var cats = db.CATEGORies.Where((x) => x.QUESTIONs.Any()).OrderBy((x) => x.QUESTIONs.Count());
-                    CatergoryModel[] catsArray = new CatergoryModel[cats.Count()];
+                    categories = new CategoryModel[cats.Count()];
+
                     int i = 0;
+                    int numQs;
+
                     foreach (var cat in cats)
                     {
-                        String name = cat.TITLE;
-                        int numQs = db.QUESTIONs.Count((x) => x.CATEGORY_ID == cat.ID);
-                        catsArray[i] = new CatergoryModel(name, numQs);
+                        if(userAuth)
+                        {
+                            numQs = db
+                                .QUESTIONs
+                                .Count((question) => question.CATEGORY_ID == cat.ID &&
+                                    !db.USERs
+                                    .FirstOrDefault((user) => user.UNAME.Equals(uname))
+                                    .USER_ANSWER
+                                    .Any((user_answer) => user_answer.QUES_ID.Equals(question.ID)));
+                        }
+                        else
+                        {
+                            numQs = db
+                                .QUESTIONs
+                                .Count((question) => question.CATEGORY_ID == cat.ID);
+                        }
+
+                        categories[i] = new CategoryModel(cat, numQs);
                         i++;
                     }
-                    ViewBag.categories = catsArray;
                 }
+
             }
+
+            return View(categories);
+        }
+
+        [Authorize]
+        public ActionResult AddCategory()
+        {
             return View();
         }
 
-        public ActionResult Authenticated()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddCategory([Bind(Include = "TITLE, DESCRIPTION")] CATEGORY newCategory, string ReturnUrl)
         {
+            if (ModelState.IsValid)
+            {
+                using (db1633477Entities db = new db1633477Entities())
+                {
+                    CATEGORY withSameTitle = db.CATEGORies.FirstOrDefault((category) => category.TITLE.Equals(newCategory.TITLE));
 
+                    if(withSameTitle == default(CATEGORY))
+                    {
+                        db.CATEGORies.Add(newCategory);
+                        db.SaveChanges();
+
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+
+            ModelState.AddModelError("", "Category Name already taken");
+            return View();
         }
-
-        //UNAUTHENTICATED
-        //display categories sorted by number of questions
-        //Ask to login to start quiz or add a question
-
-        //AUTHENTICATED
-        //display categories sorted by number of questions not answered
-        //link to start quiz
-        //link to add new categories => check if category exists already
     }
 }

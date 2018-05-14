@@ -14,6 +14,11 @@ namespace OnlineQuiz.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            if(System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Authenticated");
+            }
+
             if (ModelState.IsValid)
             {
                 using (db1633477Entities db = new db1633477Entities())
@@ -32,6 +37,11 @@ namespace OnlineQuiz.Controllers
                 }
             }
             return View();
+        }
+
+        public ActionResult Authenticated()
+        {
+
         }
 
         //UNAUTHENTICATED

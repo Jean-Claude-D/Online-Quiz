@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>HomePage</h2>
+
+@model OnlineQuiz.Models.USER
+
+@Html.LabelFor(model => model.UNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+<span>@Model.UNAME</span>
+
+@Html.LabelFor(model => model.FNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+<span>@Model.FNAME</span>
+
+@Html.LabelFor(model => model.FNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+<span>@Model.FNAME</span>
+
+@{
+    if (ViewBag.createdQuestions.Length > 0)
+    {
+        foreach (OnlineQuiz.Models.QUESTION createdQuestion in ViewBag.createdQuestions)
+        {
+            <span>@createdQuestion.CATEGORY.TITLE</span>
+            <span>:</span>
+            <span>@createdQuestion.TITLE</span>
+        }
+    }
+    else
+    {
+        <span>No created questions</span>
+    }
+}
+
+@{
+    if (ViewBag.answeredQuestions.Length > 0)
+    {
+        foreach (OnlineQuiz.Models.USER_ANSWER answer in ViewBag.answeredQuestions)
+        {
+            <span>@answer.QUESTION.TITLE</span>
+            <span>:</span>
+            <span>@(answer.CORR_ANS ? "Correct" : "Wrong")</span>
+        }
+    }
+    else
+    {
+        <span>No answered questions</span>
+    }
+}

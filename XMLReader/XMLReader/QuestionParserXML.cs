@@ -18,17 +18,26 @@ namespace XMLReader
             {
                 var categoryID = parseCategory(db, XMLParserHelper.GetStringChild(xmlQuestion, "category"));
                 var questionTitle = XMLParserHelper.GetStringChild(xmlQuestion, "title");
+                var author = XMLParserHelper.GetStringChild(xmlQuestion, "user");
+                var options = orderOptions(
+                        xmlQuestion.Elements().Where((child) => child.Name.LocalName.Equals("option")));
 
                 /* If question already exists */
-                if(db.QUESTIONs.Any((q) => q.CATEGORY_ID == categoryID && q.TITLE.Equals(questionTitle)))
+                var alreadyExist = db.QUESTIONs.FirstOrDefault((q) => q.CATEGORY_ID == categoryID && q.TITLE.Equals(questionTitle));
+                if(alreadyExist != default(QUESTION))
                 {
-                    Console.WriteLine("Already Exists...\t" + questionTitle);
+                    Console.WriteLine("Updating...\t" + questionTitle);
+
+                    alreadyExist.AUTHOR = author;
+
+                    alreadyExist.OPT_A = options[0];
+                    alreadyExist.OPT_B = options[1];
+                    alreadyExist.OPT_C = options[2];
+                    alreadyExist.OPT_D = options[3];
                 }
                 else
                 {
                     Console.WriteLine("Adding...\t" + questionTitle);
-                    var options = orderOptions(
-                        xmlQuestion.Elements().Where((child) => child.Name.LocalName.Equals("option")));
 
                     try
                     {
@@ -36,7 +45,7 @@ namespace XMLReader
                         {
                             TITLE = questionTitle,
                             CATEGORY_ID = categoryID,
-                            AUTHOR = XMLParserHelper.GetStringChild(xmlQuestion, "user"),
+                            AUTHOR = author,
                             OPT_A = options[0],
                             OPT_B = options[1],
                             OPT_C = options[2],

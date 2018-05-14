@@ -7,38 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace XMLReader
+namespace OnlineQuiz.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class USER
+    
+    public partial class QUESTION
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USER()
+        public QUESTION()
         {
-            this.QUESTIONs = new HashSet<QUESTION>();
             this.USER_ANSWER = new HashSet<USER_ANSWER>();
         }
-
-        [Required]
-        [DisplayName("UserName")]
-        public string UNAME { get; set; }
-        [Required]
-        [DisplayName("Password")]
-        public string PASSW_HASH { get; set; }
-        public string SALT { get; set; }
-        [Required]
-        [DisplayName("First Name")]
-        public string FNAME { get; set; }
-        [Required]
-        [DisplayName("Last Name")]
-        public string LNAME { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QUESTION> QUESTIONs { get; set; }
+        public int ID { get; set; }
+        public string TITLE { get; set; }
+        public Nullable<int> CATEGORY_ID { get; set; }
+        public string AUTHOR { get; set; }
+        public string OPT_A { get; set; }
+        public string OPT_B { get; set; }
+        public string OPT_C { get; set; }
+        public string OPT_D { get; set; }
+    
+        public virtual CATEGORY CATEGORY { get; set; }
+        public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USER_ANSWER> USER_ANSWER { get; set; }
     }

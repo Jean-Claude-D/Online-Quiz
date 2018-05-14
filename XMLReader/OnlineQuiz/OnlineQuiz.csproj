@@ -136,6 +136,7 @@
     <Compile Include="Models\CATEGORY.cs">
       <DependentUpon>OnlineQuiz.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatergoryModel.cs" />
     <Compile Include="Models\OnlineQuiz.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

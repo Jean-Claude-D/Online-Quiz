@@ -38,8 +38,6 @@ namespace OnlineQuiz.Controllers
         //display categories sorted by number of questions
         //Ask to login to start quiz or add a question
 
-        //1. get list of categories
-
         //AUTHENTICATED
         //display categories sorted by number of questions not answered
         //link to start quiz

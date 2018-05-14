@@ -16,7 +16,7 @@ namespace OnlineQuiz.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.returnUrl = returnUrl;
-            return View(new USER());
+            return View();
         }
 
         [HttpPost]

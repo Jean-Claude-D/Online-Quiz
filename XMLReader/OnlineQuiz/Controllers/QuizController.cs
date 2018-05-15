@@ -19,7 +19,8 @@ namespace OnlineQuiz.Controllers
             using (db1633477Entities db = new db1633477Entities())
             {
                 QUESTION[] unansweredQuestions = db.QUESTIONs
-                    .Where((question) => 
+                    .Where((question) => question.CATEGORY_ID == categoryId)
+                    .Where((question) =>
                         !db.USER_ANSWER
                         .Any((user_answer) => user_answer.UNAME.Equals(user) && user_answer.QUES_ID.Equals(question.ID)))
                     .Take(5).ToArray();

@@ -7,14 +7,14 @@ namespace OnlineQuiz.Models
 {
     public class QuizModel
     {
-        public QUESTION[] questions;
+        public RandomizedQuestion[] questions;
 
         public QuizModel()
         {
-
+            this.questions = new RandomizedQuestion[0];
         }
 
-        public QuizModel(QUESTION[] questions)
+        public QuizModel(RandomizedQuestion[] questions)
         {
             this.questions = questions;
         }

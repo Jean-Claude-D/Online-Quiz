@@ -19,6 +19,11 @@ namespace OnlineQuiz.Models
             set;
         }
 
+        public int GetInnerId()
+        {
+            return InnerQuestion.ID;
+        }
+
         public IEnumerable<string> GetChoices()
         {
             foreach(int randomIndex in _randomList(4))
@@ -50,11 +55,6 @@ namespace OnlineQuiz.Models
             {
                 yield return availables.ElementAt(_rand.Next(availables.Count));
             }
-        }
-
-        public RandomizedQuestion()
-        {
-
         }
 
         public RandomizedQuestion(QUESTION innerQuestion)

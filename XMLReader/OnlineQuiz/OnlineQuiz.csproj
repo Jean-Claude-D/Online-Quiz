@@ -171,7 +171,9 @@
     <Compile Include="Models\QUESTION.cs">
       <DependentUpon>OnlineQuiz.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\QuestionResult.cs" />
     <Compile Include="Models\QuizModel.cs" />
+    <Compile Include="Models\RandomizedQuestion.cs" />
     <Compile Include="Models\USER.cs">
       <DependentUpon>OnlineQuiz.tt</DependentUpon>
     </Compile>
@@ -195,6 +197,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Home\AddCategory.cshtml" />
+    <Content Include="Views\Quiz\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

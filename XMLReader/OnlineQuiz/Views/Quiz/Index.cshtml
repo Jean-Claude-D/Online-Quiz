@@ -8,15 +8,15 @@
 
 @model OnlineQuiz.Models.QuizModel
 
-@{ 
+@{
     foreach (OnlineQuiz.Models.RandomizedQuestion qs in Model.questions)
     {
-<div class="form-group">
-    <div>@qs.InnerQuestion.TITLE</div>
-    @{ 
-     //   IEnumerable<string>
+        <div class="form-group">
+            <div>@qs.InnerQuestion.TITLE</div>
+            @{
+                //   IEnumerable<string>
 
+            }
+        </div>
     }
-</div>
-}
 }

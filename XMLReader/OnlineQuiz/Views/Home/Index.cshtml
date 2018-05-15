@@ -10,7 +10,7 @@
 @{ foreach (OnlineQuiz.Models.CategoryModel catm in Model)
     {
 <div class="form-group">
-    @Html.ActionLink(@catm.Category.TITLE, "Quiz", "Index", new { id = catm.Category.ID }, new { @class = "nav-link" })
+    @Html.ActionLink(@catm.Category.TITLE, "Index", "Quiz",new { id = catm.Category.ID }, new { @class = "nav-link" })
     <div>Questions: @catm.NumQuestions</div>
 </div>
 }

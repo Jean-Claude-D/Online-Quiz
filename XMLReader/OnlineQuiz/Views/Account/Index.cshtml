@@ -1,35 +1,38 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Categories";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>HomePage</h2>
+<h2>Your account</h2>
 
 @model OnlineQuiz.Models.USER
-
-@Html.LabelFor(model => model.UNAME, htmlAttributes: new { @class = "control-label col-md-2" })
-<span>@Model.UNAME</span>
-
-@Html.LabelFor(model => model.FNAME, htmlAttributes: new { @class = "control-label col-md-2" })
-<span>@Model.FNAME</span>
-
-@Html.LabelFor(model => model.FNAME, htmlAttributes: new { @class = "control-label col-md-2" })
-<span>@Model.FNAME</span>
-
+<div class="form-group">
+    @Html.LabelFor(model => model.UNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div>@Model.UNAME</div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.FNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div>@Model.FNAME</div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.FNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div>@Model.FNAME</div>
+</div>
 @{
     if (ViewBag.createdQuestions.Length > 0)
     {
         foreach (OnlineQuiz.Models.QUESTION createdQuestion in ViewBag.createdQuestions)
         {
-            <span>@createdQuestion.CATEGORY.TITLE</span>
-            <span>:</span>
-            <span>@createdQuestion.TITLE</span>
+            <div class="form-group">
+                <div>@createdQuestion.CATEGORY.TITLE</div>
+                <div>:</div>
+                <div>@createdQuestion.TITLE</div>
+            </div>
         }
     }
     else
     {
-        <span>No created questions</span>
+        <div>No created questions</div>
     }
 }
 
@@ -38,13 +41,13 @@
     {
         foreach (OnlineQuiz.Models.USER_ANSWER answer in ViewBag.answeredQuestions)
         {
-            <span>@answer.QUESTION.TITLE</span>
-            <span>:</span>
-            <span>@(answer.CORR_ANS ? "Correct" : "Wrong")</span>
+            <div class="form-group">
+                <div class="control-label col-md-2">@answer.QUESTION.TITLE : @(answer.CORR_ANS ? "Correct" : "Wrong") </div>
+            </div>
         }
     }
     else
     {
-        <span>No answered questions</span>
+        <div>No answered questions</div>
     }
 }

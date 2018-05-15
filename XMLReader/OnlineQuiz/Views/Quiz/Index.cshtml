@@ -4,9 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
 @model OnlineQuiz.Models.QuizModel
+
+<h2>Quiz Time!</h2>
+
 
 @{
     foreach (OnlineQuiz.Models.RandomizedQuestion qs in Model.questions)
@@ -14,9 +15,16 @@
         <div class="form-group">
             <div>@qs.InnerQuestion.TITLE</div>
             @{
-                //   IEnumerable<string>
-
+                String[] choices = qs.GetChoices().ToArray();
+                foreach (String choice in choices)
+                {
+                    <input type="radio" name="@qs.InnerQuestion.ID" value="@choice"> @choice
+                }
             }
         </div>
     }
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Submit Answers" class="btn btn-default" />
+    </div>
+
 }

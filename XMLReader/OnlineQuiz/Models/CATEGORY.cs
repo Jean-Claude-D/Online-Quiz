@@ -11,7 +11,9 @@ namespace OnlineQuiz.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CATEGORY
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +21,12 @@ namespace OnlineQuiz.Models
         {
             this.QUESTIONs = new HashSet<QUESTION>();
         }
-    
+
         public int ID { get; set; }
+        [Required]
+        [DisplayName("Category Name")]
         public string TITLE { get; set; }
+        [DisplayName("Description")]
         public string DESCRIPTION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

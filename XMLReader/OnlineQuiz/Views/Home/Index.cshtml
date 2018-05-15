@@ -3,5 +3,15 @@
     ViewBag.Title = "Index";
 }
 
+@model OnlineQuiz.Models.CategoryModel[]
+
 <h2>Categories</h2>
 
+@{ foreach (OnlineQuiz.Models.CategoryModel catm in Model)
+    {
+<div class="form-group">
+    @Html.ActionLink(@catm.Category.TITLE, "Quiz", "Index", new { id = catm.Category.ID }, new { @class = "nav-link" })
+    <div>Questions: @catm.NumQuestions</div>
+</div>
+}
+}

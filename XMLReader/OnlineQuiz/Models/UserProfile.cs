@@ -10,7 +10,7 @@ namespace OnlineQuiz.Models
         public string Username { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public QUESTION[] AnsweredQuestions { get; set; }
+        public USER_ANSWER[] AnsweredQuestions { get; set; }
         public QUESTION[] CreatedQuestions { get; set; }
 
         public UserProfile() { }
@@ -19,7 +19,7 @@ namespace OnlineQuiz.Models
             string Username,
             string Firstname,
             string Lastname,
-            QUESTION[] AnsweredQuestions,
+            USER_ANSWER[] AnsweredQuestions,
             QUESTION[] CreatedQuestions)
         {
             this.Username = Username;

@@ -7,3 +7,16 @@
 <h2>Index</h2>
 
 @model OnlineQuiz.Models.QuizModel
+
+@{ 
+    foreach (OnlineQuiz.Models.RandomizedQuestion qs in Model.questions)
+    {
+<div class="form-group">
+    <div>@qs.InnerQuestion.TITLE</div>
+    @{ 
+     //   IEnumerable<string>
+
+    }
+</div>
+}
+}

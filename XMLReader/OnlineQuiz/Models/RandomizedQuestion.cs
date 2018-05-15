@@ -15,7 +15,7 @@ namespace OnlineQuiz.Models
 
         public QUESTION InnerQuestion
         {
-            private get;
+            get;
             set;
         }
 

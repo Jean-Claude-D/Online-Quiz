@@ -34,11 +34,7 @@ namespace OnlineQuiz.Controllers
                         Firstname = loggedUser.FNAME,
                         Lastname = loggedUser.LNAME,
                         CreatedQuestions = loggedUser.QUESTIONs.ToArray(),
-                        AnsweredQuestions = db
-                        .QUESTIONs
-                        .Where((question) =>
-                            loggedUser.USER_ANSWER.Any((user_answer) => question.ID.Equals(user_answer.QUES_ID))
-                        ).ToArray()
+                        AnsweredQuestions = db.USER_ANSWER.Where((x) => x.UNAME.Equals(loggedUser.UNAME)).ToArray()
                     });
                 }
                 else

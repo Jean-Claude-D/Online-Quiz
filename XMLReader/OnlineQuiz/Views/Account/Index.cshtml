@@ -3,25 +3,27 @@
     ViewBag.Title = "Categories";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <h2>Your account</h2>
 
-@model OnlineQuiz.Models.USER
+@model OnlineQuiz.Models.UserProfile
+
 <div class="form-group">
-    @Html.LabelFor(model => model.UNAME, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div>@Model.UNAME</div>
+    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div>@Model.Username</div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(model => model.FNAME, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div>@Model.FNAME</div>
+    @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div>@Model.Firstname</div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(model => model.FNAME, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div>@Model.FNAME</div>
+    @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div>@Model.Lastname</div>
 </div>
 @{
-    if (ViewBag.createdQuestions.Length > 0)
+    if (Model.CreatedQuestions.Length > 0)
     {
-        foreach (OnlineQuiz.Models.QUESTION createdQuestion in ViewBag.createdQuestions)
+        foreach (OnlineQuiz.Models.QUESTION createdQuestion in Model.CreatedQuestions)
         {
             <div class="form-group">
                 <div>@createdQuestion.CATEGORY.TITLE</div>
@@ -37,9 +39,9 @@
 }
 
 @{
-    if (ViewBag.answeredQuestions.Length > 0)
+    if (Model.AnsweredQuestions.Length > 0)
     {
-        foreach (OnlineQuiz.Models.USER_ANSWER answer in ViewBag.answeredQuestions)
+        foreach (OnlineQuiz.Models.USER_ANSWER answer in Model.AnsweredQuestions)
         {
             <div class="form-group">
                 <div class="control-label col-md-2">@answer.QUESTION.TITLE : @(answer.CORR_ANS ? "Correct" : "Wrong") </div>
@@ -51,3 +53,6 @@
         <div>No answered questions</div>
     }
 }
+
+
+
